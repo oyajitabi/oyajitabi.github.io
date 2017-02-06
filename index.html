@@ -15,6 +15,18 @@
 		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+		<script>
+			$(function() {
+				$("#recordButton").click(function() {
+					window.location.href = "/record/list.html";
+				});
+
+
+				$("#glossaryButton").click(function() {
+					window.location.href = "";
+				});
+			});
+		</script>
 	</head>
 	<body>
 		<!-- Google Tag Manager (noscript) -->
@@ -29,10 +41,10 @@
 				<div class="ui-field-contain">
 					<div class="ui-grid-solo">
 						<div class="ui-block-a">
-							<button class="ui-btn ui-corner-all"><i class="material-icons">event</i><br>旅の記録</button>
+							<button id="recordButton" class="ui-btn ui-corner-all"><i class="material-icons">event</i><br>旅の記録</button>
 						</div>
 						<div class="ui-block-a">
-							<button class="ui-btn ui-corner-all"><i class="material-icons">local_library</i><br>用語集</button>
+							<button id="glossaryButton" class="ui-btn ui-corner-all"><i class="material-icons">local_library</i><br>用語集</button>
 						</div>
 					</div>
 				</div>
