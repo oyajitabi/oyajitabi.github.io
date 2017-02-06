@@ -15,18 +15,6 @@
 		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
-		<script>
-			$(function() {
-				$("#recordButton").click(function() {
-					window.location.href = "/record/list.html";
-				});
-
-
-				$("#glossaryButton").click(function() {
-					window.location.href = "/glossary/list.html";
-				});
-			});
-		</script>
 	</head>
 	<body>
 		<!-- Google Tag Manager (noscript) -->
@@ -35,18 +23,12 @@
 		<!-- End Google Tag Manager (noscript) -->
 		<div data-role="page">
 			<div data-role="header" data-position="fixed">
-				<h1>メニュー</h1>
+				<a href="/index.html" class="ui-btn ui-corner-all ui-btn-icon-notext ui-icon-back" target="_top">戻る</a>
+				<h1>用語集</h1>
 			</div>
 			<div role="main" class="ui-content">
 				<div class="ui-field-contain">
-					<div class="ui-grid-solo">
-						<div class="ui-block-a">
-							<button id="recordButton" class="ui-btn ui-corner-all"><i class="material-icons">event</i><br>旅の記録</button>
-						</div>
-						<div class="ui-block-a">
-							<button id="glossaryButton" class="ui-btn ui-corner-all"><i class="material-icons">local_library</i><br>用語集</button>
-						</div>
-					</div>
+					
 				</div>
 			</div>
 			<div data-role="footer">
