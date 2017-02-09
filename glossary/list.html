@@ -32,6 +32,7 @@
 				$f.getJSONP("https://script.google.com/macros/s/AKfycbxFxiVG2v7gn6FqkLbg5xMxjWY7-tUMsW860kgQzf2TenoCsaed/exec", {
 					"function": "getList"
 				}, function(data) {
+					console.log(data);
 					$("#list").empty();
 
 					for (var i in data["list"]) {
