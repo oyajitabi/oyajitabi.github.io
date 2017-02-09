@@ -32,13 +32,13 @@
 				$f.getJSONP("https://script.google.com/macros/s/AKfycbxFxiVG2v7gn6FqkLbg5xMxjWY7-tUMsW860kgQzf2TenoCsaed/exec", {
 					"function": "getList"
 				}, function(data) {
-					console.log(data);
 					$("#list").empty();
+					var list = data["data"]["list"];
 
-					for (var i in data["list"]) {
+					for (var i in list) {
 						$("<li></li>", {
-							"data-ruby": data["list"][i]["RUBY"]
-						}).html(data["list"][i]["PHRASEOLOGY"]).appendTo($("#list"));
+							"data-ruby": list[i]["RUBY"]
+						}).html(list[i]["PHRASEOLOGY"]).appendTo($("#list"));
 					}
 
 					$("#list").listview();
