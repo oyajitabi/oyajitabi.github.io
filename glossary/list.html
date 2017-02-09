@@ -15,6 +15,29 @@
 		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+		<script src="/js/common.js"></script>
+		<script>
+			$(function() {
+				read();
+			});
+
+			function read() {
+				$f.getJSONP("https://script.google.com/macros/s/AKfycbxFxiVG2v7gn6FqkLbg5xMxjWY7-tUMsW860kgQzf2TenoCsaed/exec", {
+					"function": "getData"
+				}, function(data) {
+					$("#list").empty();
+
+					for (var i in data["list"]) {
+						$("<li></li>", {
+							"data-ruby": data["list"][i]["RUBY"]
+						}).html(data["list"][i]["PHRASEOLOGY"]).appendTo($("#list"));
+					}
+
+					$("#list").listview();
+				});
+
+			}
+		</script>
 	</head>
 	<body>
 		<!-- Google Tag Manager (noscript) -->
@@ -28,7 +51,7 @@
 			</div>
 			<div role="main" class="ui-content">
 				<div class="ui-field-contain">
-					
+					<ul id="list" data-role="listview" data-autodividers="true"></ul>
 				</div>
 			</div>
 			<div data-role="footer">
