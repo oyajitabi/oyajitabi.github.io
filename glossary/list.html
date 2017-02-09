@@ -17,7 +17,7 @@
 		<script>
 			$(document).on("mobileinit", function() {
 				$.mobile.listview.prototype.options.autodividersSelector = function(element) {
-					return element.data("ruby").charAt(0);
+					return element.data("ruby").charAt(0) + "行";
 				};
 			});
 		</script>
@@ -37,10 +37,10 @@
 
 					for (var i in list) {
 						$("<li></li>", {
-							"data-ruby": list[i]["RUBY"]
+							"data-ruby": list[i]["COLUMN"]
 						}).append($("<a></a>", {
-							"href": "detail.html?id=" + list[i]["ROWID"]
-						}).html(list[i]["PHRASEOLOGY"])).appendTo($("#list"));
+							"href": "detail.html?column=" + list[i]["COLUMN"]
+						}).html(list[i]["INITIAL"])).appendTo($("#list"));
 					}
 
 					$("#list").listview("refresh");
