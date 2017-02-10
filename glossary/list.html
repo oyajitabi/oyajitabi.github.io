@@ -17,7 +17,7 @@
 		<script>
 			$(document).on("mobileinit", function() {
 				$.mobile.listview.prototype.options.autodividersSelector = function(element) {
-					return element.data("ruby").charAt(0);
+					return element.data("ruby");
 				};
 			});
 		</script>
@@ -29,32 +29,12 @@
 			});
 
 			function read() {
-				$.ajax({
-					type: "POST",
-					url: "https://script.google.com/macros/s/AKfycbxFxiVG2v7gn6FqkLbg5xMxjWY7-tUMsW860kgQzf2TenoCsaed/exec",
-					data: {
-						"function": "getList",
-						"column": "1"
-					},
-					dataType: "jsonp",
-					beforeSend: function(jqXHR) {
-						$f.showLoading();
-					}
-				}).done(function(data, textStatus, jqXHR) {
-					alert("OOO");
-				}).fail(function(data, textStatus, errorThrown) {
-					alert(errorThrown.message);
-				}).always(function(jqXHR, textStatus) {
-					$f.hideLoading();
-				});
-/*
 				$f.getJSONP("https://script.google.com/macros/s/AKfycbxFxiVG2v7gn6FqkLbg5xMxjWY7-tUMsW860kgQzf2TenoCsaed/exec", {
 					"function": "getList"
 				}, function(data) {
-					alert("ABC");
 					$("#list").empty();
 
-					var columns = ["あ", "か", "さ", "た", "な", "は", "ま", "や", "ら", "わ"];
+					var columns = ["あ行", "か行", "さ行", "た行", "な行", "は行", "ま行", "や行", "ら行", "わ行"];
 					var list = data["data"]["list"];
 
 					for (var i in list) {
@@ -67,7 +47,6 @@
 
 					$("#list").listview("refresh");
 				});
-*/
 			}
 		</script>
 	</head>
