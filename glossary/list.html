@@ -13,6 +13,11 @@
 		<title>オヤジ旅</title>
 		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
+		<style type="text/css">
+			span.required, label.error {
+				color: #f08080;
+			}
+		</style>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 		<script>
 			$(document).on("mobileinit", function() {
@@ -22,9 +27,54 @@
 			});
 		</script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+		<script src="/js/jquery.validate.min.js"></script>
 		<script src="/js/common.js"></script>
 		<script>
 			$(function() {
+				$("#registerForm").submit(function(event) {
+					event.preventDefault();
+				});
+
+				$("#registerForm").validate({
+					rules: {
+						"phraseology": {
+							required: true
+						},
+						"ruby": {
+							required: true
+						},
+						"description": {
+							required: true
+						},
+						"use": {
+							required: true
+						}
+					},
+					messages: {
+						"phraseology": {
+							required: "用語を入力してください。"
+						},
+						"ruby": {
+							required: "よみがなを入力してください。"
+						},
+						"description": {
+							required: "説明を入力してください。"
+						},
+						"use": {
+							required: "用法を入力してください。"
+						}
+					},
+					errorPlacement: function (error, element) {
+						error.appendTo($("#" + $(element).attr("id") + "#Error"));
+					}
+				});
+
+				$("#registerButton").click(function() {
+					if ($("#registerForm").valid()) {
+						alert("XX");
+					}
+				});
+
 				read();
 			});
 
@@ -55,15 +105,51 @@
 		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M498FK8"
 		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 		<!-- End Google Tag Manager (noscript) -->
-		<div data-role="page">
+		<div id="mainPage" data-role="page">
 			<div data-role="header" data-position="fixed">
 				<a href="/index.html" class="ui-btn ui-corner-all ui-btn-icon-notext ui-icon-back" target="_top">戻る</a>
 				<h1>用語集</h1>
+				<a href="#registerPage" class="ui-btn ui-corner-all ui-btn-icon-notext ui-icon-plus" target="_top">戻る</a>
 			</div>
 			<div role="main" class="ui-content">
 				<div class="ui-field-contain">
 					<ul id="list" data-role="listview" data-autodividers="true"></ul>
 				</div>
+			</div>
+			<div data-role="footer">
+				<h3>&copy; OYAJITABI</h3>
+			</div>
+		</div>
+
+		<div id="registerPage" data-role="page">
+			<div data-role="header" data-position="fixed">
+				<a href="#mainPage" class="ui-btn ui-corner-all ui-btn-icon-notext ui-icon-back">戻る</a>
+				<h1>新規登録</h1>
+			</div>
+			<div role="main" class="ui-content">
+				<form id="registerForm" name="registerForm" action="#" method="post">
+					<div class="ui-field-contain">
+						<label for="">用語</label>
+						<input type="text" id="phraseology" name="phraseology">
+					</div>
+					<div class="ui-field-contain">
+						<label for="">よみがな</label>
+						<input type="text" id="ruby" name="ruby">
+						<label id="rubyError" class="label-error"></label>
+						<input type="hidden" id="column" name="column">
+					</div>
+					<div class="ui-field-contain">
+						<label for="">説明</label>
+						<textarea id="description" name="description"></textarea>
+					</div>
+					<div class="ui-field-contain">
+						<label for="">用法</label>
+						<input type="text" id="use" name="use">
+					</div>
+					<div class="ui-field-contain">
+						<button id="registerButton">登録する</button>
+					</div>
+				</form>
 			</div>
 			<div data-role="footer">
 				<h3>&copy; OYAJITABI</h3>
