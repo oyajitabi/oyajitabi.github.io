@@ -32,7 +32,7 @@
 				$f.getJSONP("https://script.google.com/macros/s/AKfycbxFxiVG2v7gn6FqkLbg5xMxjWY7-tUMsW860kgQzf2TenoCsaed/exec", {
 					"function": "getList"
 				}, function(data) {
-					$("<li><li>", {
+					$("<li></li>", {
 						"data-ruby": "X"
 					}).appendTo($("#list"));
 					$("#list").listview("refresh");
