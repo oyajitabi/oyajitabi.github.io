@@ -41,8 +41,8 @@
 					}
 				}).done(function(data, textStatus, jqXHR) {
 					alert("OOO");
-				}).fail(function() {
-					alert("XXX");
+				}).fail(function(data, textStatus, errorThrown) {
+					alert(textStatus);
 				}).always(function(jqXHR, textStatus) {
 					$f.hideLoading();
 				});
