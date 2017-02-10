@@ -33,13 +33,15 @@
 					"function": "getList"
 				}, function(data) {
 					$("#list").empty();
+
+					var columns = ["あ行", "か行", "さ行", "た行", "な行", "は行", "ま行", "や行", "ら行", "わ行"];
 					var list = data["data"]["list"];
 
 					for (var i in list) {
 						$("<li></li>", {
-							"data-ruby": list[i]["COLUMN"]
+							"data-ruby": columns[list[i]["COLUMN"]]
 						}).append($("<a></a>", {
-							"href": "detail.html?column="
+							"href": "detail.html?column=" + list[i]["COLUMN"]
 						}).html(list[i]["INITIAL"])).appendTo($("#list"));
 					}
 
