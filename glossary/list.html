@@ -127,7 +127,8 @@
 					$("<li></li>", {
 						"data-ruby": columns[list[i]["COLUMN"]]
 					}).append($("<a></a>", {
-						"href": "/glossary/detail.html?column=" + list[i]["COLUMN"]
+						"href": "/glossary/detail.html?column=" + list[i]["COLUMN"],
+						"target": "_self"
 					}).html(list[i]["INITIAL"])).appendTo($("#list"));
 				}
 
