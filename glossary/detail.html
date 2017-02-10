@@ -37,7 +37,13 @@
 				var list = data["data"]["list"];
 
 				for (var i in list) {
-					$("<li></li>").append($("<p></p>").html(list[i]["PHRASEOLOGY"] + " " + "(" + list[i]["RUBY"] + ")")).appendTo($("#list"));
+					$("<li></li>").append(
+						$("<h2></h2>").html(list[i]["PHRASEOLOGY"] + " " + "(" + list[i]["RUBY"] + ")")
+					).append(
+						$("<p></p>").html(list[i]["DESCRIPTION"])
+					).append(
+						$("<p></p>").html(list[i]["USE"])
+					).appendTo($("#list"));
 				}
 
 				$("#list").listview("refresh");
@@ -56,7 +62,7 @@
 			</div>
 			<div role="main" class="ui-content">
 				<div class="ui-field-contain">
-					<ul id="list" data-role="listview" data-autodividers="true"></ul>
+					<ul id="list" data-role="listview"></ul>
 				</div>
 			</div>
 			<div data-role="footer">
