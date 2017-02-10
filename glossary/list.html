@@ -31,13 +31,17 @@
 			function read() {
 				$.ajax({
 					type: "POST",
-					url: url,
-					data: data,
+					url: "https://script.google.com/macros/s/AKfycbxFxiVG2v7gn6FqkLbg5xMxjWY7-tUMsW860kgQzf2TenoCsaed/exec",
+					data: {
+						"function": "getList"
+					},
 					dataType: "jsonp",
 					beforeSend: function(jqXHR) {
 						$f.showLoading();
 					}
 				}).done(function(data, textStatus, jqXHR) {
+					alert("OOO");
+				}).fail(function() {
 					alert("XXX");
 				}).always(function(jqXHR, textStatus) {
 					$f.hideLoading();
