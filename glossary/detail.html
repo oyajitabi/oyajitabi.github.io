@@ -37,11 +37,7 @@
 				var list = data["data"]["list"];
 
 				for (var i in list) {
-					$("<li></li>", {
-						"data-ruby": columns[list[i]["COLUMN"]]
-					}).append($("<a></a>", {
-						"href": "detail.html?column=" + list[i]["COLUMN"]
-					}).html(list[i]["INITIAL"])).appendTo($("#list"));
+					$("<li></li>").append($("<p></p>").html(list[i]["PHRASEOLOGY"] + " " + "(" + list[i]["RUBY"] + ")")).appendTo($("#list"));
 				}
 
 				$("#list").listview("refresh");
