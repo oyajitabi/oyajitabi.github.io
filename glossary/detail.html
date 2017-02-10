@@ -19,7 +19,7 @@
 		<script>
 			$(function() {
 				var columns = ["あ行", "か行", "さ行", "た行", "な行", "は行", "ま行", "や行", "ら行", "わ行"];
-				var column = decodeURIComponent(location.search.match(/column=(.*?)(&|$)/)[1]);
+				var column = parseInt(decodeURIComponent(location.search.match(/column=(.*?)(&|$)/)[1]));
 
 				$("#column").html(columns[column]);
 
@@ -55,7 +55,7 @@
 		<!-- End Google Tag Manager (noscript) -->
 		<div id="mainPage" data-role="page">
 			<div data-role="header" data-position="fixed">
-				<a href="/list.html" class="ui-btn ui-corner-all ui-btn-icon-notext ui-icon-back" target="_top">戻る</a>
+				<a href="/glossary/list.html" class="ui-btn ui-corner-all ui-btn-icon-notext ui-icon-back" target="_top">戻る</a>
 				<h1><span id="column"></span></h1>
 			</div>
 			<div role="main" class="ui-content">
