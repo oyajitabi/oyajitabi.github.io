@@ -29,11 +29,24 @@
 			});
 
 			function read() {
+				$.ajax({
+					type: "POST",
+					url: url,
+					data: data,
+					dataType: "jsonp",
+					beforeSend: function(jqXHR) {
+						$f.showLoading();
+					}
+				}).done(function(data, textStatus, jqXHR) {
+					alert("XXX");
+				}).always(function(jqXHR, textStatus) {
+					$f.hideLoading();
+				});
+/*
 				$f.getJSONP("https://script.google.com/macros/s/AKfycbxFxiVG2v7gn6FqkLbg5xMxjWY7-tUMsW860kgQzf2TenoCsaed/exec", {
 					"function": "getList"
 				}, function(data) {
 					alert("ABC");
-/*
 					$("#list").empty();
 
 					var columns = ["あ", "か", "さ", "た", "な", "は", "ま", "や", "ら", "わ"];
