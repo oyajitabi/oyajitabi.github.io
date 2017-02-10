@@ -32,6 +32,9 @@
 				$f.getJSONP("https://script.google.com/macros/s/AKfycbxFxiVG2v7gn6FqkLbg5xMxjWY7-tUMsW860kgQzf2TenoCsaed/exec", {
 					"function": "getList"
 				}, function(data) {
+					$("#list").append($("<li><li>").append($("<a></a>").html("あああ")));
+					$("#list").listview("refresh");
+/*
 					$("#list").empty();
 
 					var columns = ["あ", "か", "さ", "た", "な", "は", "ま", "や", "ら", "わ"];
@@ -46,8 +49,8 @@
 					}
 
 					$("#list").listview("refresh");
+*/
 				});
-				alert("abc");
 			}
 		</script>
 	</head>
