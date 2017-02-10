@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- Google Tag Manager -->
+		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+		})(window,document,'script','dataLayer','GTM-M498FK8');</script>
+		<!-- End Google Tag Manager -->
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width">
+		<title>オヤジ旅</title>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+		<script src="/js/common.js"></script>
+		<script>
+			$(function() {
+				var columns = ["あ行", "か行", "さ行", "た行", "な行", "は行", "ま行", "や行", "ら行", "わ行"];
+				var column = decodeURIComponent(location.search.match(/column=(.*?)(&|$)/)[1]);
+
+				$("#column").html(columns[column]);
+
+				$f.getJSONP("https://script.google.com/macros/s/AKfycbxFxiVG2v7gn6FqkLbg5xMxjWY7-tUMsW860kgQzf2TenoCsaed/exec", {
+					"function": "getDetail",
+					"column": column
+				}, function(data) {
+					buildList(data);
+				});
+			});
+
+			function buildList(data) {
+				$("#list").empty();
+
+				var list = data["data"]["list"];
+
+				for (var i in list) {
+					$("<li></li>", {
+						"data-ruby": columns[list[i]["COLUMN"]]
+					}).append($("<a></a>", {
+						"href": "detail.html?column=" + list[i]["COLUMN"]
+					}).html(list[i]["INITIAL"])).appendTo($("#list"));
+				}
+
+				$("#list").listview("refresh");
+			}
+		</script>
+	</head>
+	<body>
+		<!-- Google Tag Manager (noscript) -->
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M498FK8"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<!-- End Google Tag Manager (noscript) -->
+		<div id="mainPage" data-role="page">
+			<div data-role="header" data-position="fixed">
+				<a href="/list.html" class="ui-btn ui-corner-all ui-btn-icon-notext ui-icon-back" target="_top">戻る</a>
+				<h1><span id="column"></span></h1>
+			</div>
+			<div role="main" class="ui-content">
+				<div class="ui-field-contain">
+					<ul id="list" data-role="listview" data-autodividers="true"></ul>
+				</div>
+			</div>
+			<div data-role="footer">
+				<h3>&copy; OYAJITABI</h3>
+			</div>
+		</div>
+	</body>
+</html>
