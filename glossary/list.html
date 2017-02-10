@@ -98,9 +98,14 @@
 							"phraseology": $("#phraseology").val(),
 							"ruby": $("#ruby").val(),
 							"description": $("#description").val(),
-							"use": $("#use").val()
+							"use": "「" + $("#use").val() + "」"
 						}, function(data) {
 							buildList(data);
+							$.mobile.changePage("#mainPage");
+							$("#phraseology").val("");
+							$("#ruby").val("");
+							$("#description").val("");
+							$("#use").val("");
 						});
 					}
 				});
