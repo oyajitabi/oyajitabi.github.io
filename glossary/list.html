@@ -32,7 +32,6 @@
 				$f.getJSONP("https://script.google.com/macros/s/AKfycbxFxiVG2v7gn6FqkLbg5xMxjWY7-tUMsW860kgQzf2TenoCsaed/exec", {
 					"function": "getList"
 				}, function(data) {
-					$("#list").html(data["data"]["list"][0]["COLUMN"]);
 					alert(data["data"]["list"][0]["COLUMN"]);
 /*
 					$("#list").empty();
