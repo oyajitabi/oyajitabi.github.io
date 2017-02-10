@@ -42,7 +42,7 @@
 				}).done(function(data, textStatus, jqXHR) {
 					alert("OOO");
 				}).fail(function(data, textStatus, errorThrown) {
-					alert(textStatus);
+					alert(errorThrown.message);
 				}).always(function(jqXHR, textStatus) {
 					$f.hideLoading();
 				});
