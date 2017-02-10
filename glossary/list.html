@@ -35,13 +35,18 @@
 					event.preventDefault();
 				});
 
+				$.validator.addMethod("JapaneseSyllabaryCharacters", function(value, element) {
+					return value.match(/^[\u3040-\u309F]+$/);
+				});
+
 				$("#registerForm").validate({
 					rules: {
 						"phraseology": {
 							required: true
 						},
 						"ruby": {
-							required: true
+							required: true,
+							JapaneseSyllabaryCharacters: true
 						},
 						"description": {
 							required: true
@@ -56,6 +61,7 @@
 						},
 						"ruby": {
 							required: "よみがなを入力してください。"
+							JapaneseSyllabaryCharacters: "よみがなはひらがなで入力してください。"
 						},
 						"description": {
 							required: "説明を入力してください。"
@@ -71,32 +77,56 @@
 
 				$("#registerButton").click(function() {
 					if ($("#registerForm").valid()) {
-						alert("XX");
+						var columns = {
+							"あ": 0, "い": 0, "う": 0, "え": 0, "お": 0,
+							"か": 1, "き": 1, "く": 1, "け": 1, "こ": 1,
+							"さ": 2, "し": 2, "す": 2, "せ": 2, "そ": 2,
+							"た": 3, "ち": 3, "つ": 3, "て": 3, "と": 3,
+							"な": 4, "に": 4, "ぬ": 4, "ね": 4, "の": 4,
+							"は": 5, "ひ": 5, "ふ": 5, "へ": 5, "ほ": 5,
+							"ま": 6, "み": 6, "む": 6, "め": 6, "も": 6,
+							"や": 7, "ゆ": 7, "よ": 7,
+							"ら": 8, "り": 8, "る": 8, "れ": 8, "ろ": 8,
+							"わ": 9, "を": 9, "ん": 9
+						};
+
+						var column = columns[$("#ruby").val().charAt(0)];
+						
+						$f.getJSONP("https://script.google.com/macros/s/AKfycbxFxiVG2v7gn6FqkLbg5xMxjWY7-tUMsW860kgQzf2TenoCsaed/exec", {
+							"function": "registerData",
+							"column": column,
+							"phraseology": $("#phraseology").val(),
+							"ruby": $("#ruby").val(),
+							"description": $("#description").val(),
+							"use": $("#use").val()
+						}, function(data) {
+							buildList(data);
+						});
 					}
 				});
 
-				read();
-			});
-
-			function read() {
 				$f.getJSONP("https://script.google.com/macros/s/AKfycbxFxiVG2v7gn6FqkLbg5xMxjWY7-tUMsW860kgQzf2TenoCsaed/exec", {
 					"function": "getList"
 				}, function(data) {
-					$("#list").empty();
-
-					var columns = ["あ行", "か行", "さ行", "た行", "な行", "は行", "ま行", "や行", "ら行", "わ行"];
-					var list = data["data"]["list"];
-
-					for (var i in list) {
-						$("<li></li>", {
-							"data-ruby": columns[list[i]["COLUMN"]]
-						}).append($("<a></a>", {
-							"href": "detail.html?column=" + list[i]["COLUMN"]
-						}).html(list[i]["INITIAL"])).appendTo($("#list"));
-					}
-
-					$("#list").listview("refresh");
+					buildList(data);
 				});
+			});
+
+			function buildList(data) {
+				$("#list").empty();
+
+				var columns = ["あ行", "か行", "さ行", "た行", "な行", "は行", "ま行", "や行", "ら行", "わ行"];
+				var list = data["data"]["list"];
+
+				for (var i in list) {
+					$("<li></li>", {
+						"data-ruby": columns[list[i]["COLUMN"]]
+					}).append($("<a></a>", {
+						"href": "detail.html?column=" + list[i]["COLUMN"]
+					}).html(list[i]["INITIAL"])).appendTo($("#list"));
+				}
+
+				$("#list").listview("refresh");
 			}
 		</script>
 	</head>
@@ -137,7 +167,6 @@
 						<label for="">よみがな</label>
 						<input type="text" id="ruby" name="ruby">
 						<label id="rubyError" class="label-error"></label>
-						<input type="hidden" id="column" name="column">
 					</div>
 					<div class="ui-field-contain">
 						<label for="">説明</label>
